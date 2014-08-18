@@ -10,6 +10,10 @@ FROM dockerfile/ruby
 # Install FPM.
 RUN gem install fpm
 
+# Install rpm tools
+RUN apt-get update -y
+RUN apt-get install -y rpm
+
 # Define mountable directories.
 VOLUME ["/data"]
 
