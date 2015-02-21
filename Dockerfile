@@ -5,7 +5,7 @@
 #
 
 # Pull base image.
-FROM dockerfile/ruby
+FROM azukiapp/ruby
 
 # Install FPM.
 RUN gem install fpm
@@ -15,9 +15,16 @@ RUN echo deb http://repo.aptly.info/ squeeze main > /etc/apt/sources.list.d/aptl
 RUN apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 2A194991
 
 # Install rpm tools
-RUN \
-  apt-get update -qqy && \
-  apt-get install -qqy rpm aptly createrepo
+RUN apt-get update -qqy \
+  && apt-get install -qqy \
+    rpm \
+    aptly \
+    createrepo \
+    bzip2 \
+    gnupg \
+    gpgv \
+  && apt-get clean -qq \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Define mountable directories.
 VOLUME ["/data"]
