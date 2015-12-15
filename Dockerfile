@@ -8,6 +8,8 @@ RUN apt-get update -qqy \
                       rpm createrepo aptly\
                       bzip2 \
                       gnupg gpgv \
+                      python \
+                      python-pip \
   && apt-get clean -qq \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && gem install fpm --no-ri --no-rdoc
